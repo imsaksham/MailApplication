@@ -9,6 +9,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,7 +45,7 @@ public class Email {
 	@Column(name = "recipient", unique = false)
 	private String sendTo;
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "recipients")
 	private List<String> recipients;
 	
@@ -68,7 +69,7 @@ public class Email {
 	private LocalDate date;
 	
 	@Column(name = "starred")
-	private Boolean starred;
+	private String starred;
 	
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "user_email", nullable = true, referencedColumnName = "email")
@@ -96,6 +97,16 @@ public class Email {
 		this.date = date;
 	}
 
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 
 	public String getSendFrom() {
@@ -170,27 +181,25 @@ public class Email {
 
 
 
-	public Boolean getStarred() {
+	public String getStarred() {
 		return starred;
 	}
 
 
 
-	public void setStarred(Boolean starred) {
+	public void setStarred(String starred) {
 		this.starred = starred;
 	}
 
 
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
+	@Override
+	public String toString() {
+		return "Email [id=" + id + ", sendFrom=" + sendFrom + ", sendTo=" + sendTo + ", recipients=" + recipients
+				+ ", subject=" + subject + ", message=" + message + ", date=" + date + ", starred=" + starred + "]";
+	}
+
+	
 	
 	
 }

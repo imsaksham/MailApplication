@@ -13,9 +13,11 @@ public interface EmailService {
 	
 	public List<Email> getEmailsByUser(String sendFrom, String key);
 	
-	public String deleteEmailByUser(String sendTo, String sendFrom, String key);
+	public String deleteEmailByUser(String sendTo, String sendFrom, Integer id, String key);
 	
 	public String deleteEmailsByUser(String sendTo, String sendFrom, String key);
 	
-	public Email starredEmail(Email email, String key);
+	public String deleteAllUserEmails(String sendTo, String key);
+	
+	public String starredEmail(String sendTo, Integer id, String starred);
 }
