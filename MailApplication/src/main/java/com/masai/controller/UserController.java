@@ -1,5 +1,7 @@
 package com.masai.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("users")
-	public ResponseEntity<User> registerUserOnEmail(@RequestBody User user) {
+	public ResponseEntity<User> registerUserOnEmail(@RequestBody @Valid User user) {
 		User savedUsers = userService.registerUser(user);
 		
 		return new ResponseEntity<User>(savedUsers, HttpStatus.CREATED);
@@ -47,7 +49,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/updateuser")
-	public ResponseEntity<User> updateUser(@RequestBody User user, @RequestParam(required = false) String key) {
+	public ResponseEntity<User> updateUser(@RequestBody @Valid User user, @RequestParam(required = false) String key) {
 		
 		User updatedUser = userService.updateUser(user, key);
 		
@@ -55,7 +57,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/deleteuser")
-	public String deleteUser(@RequestBody User user, @RequestParam(required = false) String key) {
+	public String deleteUser(@RequestBody @Valid User user, @RequestParam(required = false) String key) {
 		
 		return userService.deleteUser(user, key);
 	}
