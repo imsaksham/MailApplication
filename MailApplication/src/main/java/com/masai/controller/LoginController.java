@@ -1,5 +1,7 @@
 package com.masai.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO loginDto) {
+	public ResponseEntity<String> logInCustomer(@RequestBody @Valid LoginDTO loginDto) {
 		
 		String result =  loginService.logIntoAccount(loginDto);
 		
