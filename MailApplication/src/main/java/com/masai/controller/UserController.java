@@ -56,9 +56,9 @@ public class UserController {
 		return new ResponseEntity<User>(updatedUser, HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/deleteuser")
-	public String deleteUser(@RequestBody @Valid User user, @RequestParam(required = false) String key) {
+	@DeleteMapping("/deleteuser/{username}")
+	public String deleteUser(@PathVariable("username") @Valid String username, @RequestParam(required = false) String key) {
 		
-		return userService.deleteUser(user, key);
+		return userService.deleteUser(username, key);
 	}
 }

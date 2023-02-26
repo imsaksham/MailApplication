@@ -10,6 +10,6 @@ public interface UserService {
 	public User getUserByUsername(String email);
 	public UserDTO getFirstNameAndMobileNumber(String email);
 	public User updateUser(User user, String key);
-	public String deleteUser(User user, String key);
+	public String deleteUser(String username, String key);
 	
 }
