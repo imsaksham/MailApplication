@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String deleteUser(User user, String key) {
+	public String deleteUser(String username, String key) {
 		
 		CurrentUserSession activeSession = userSessionDao.findByUuid(key);
 		
@@ -90,15 +90,15 @@ public class UserServiceImpl implements UserService {
 			throw new LoginException("Please provide a valid key to delete your email account");
 		}
 		
-		Optional<User> opt = userDao.findById(user.getEmail());
+		User user = userDao.findByUsername(username);
 		
-		if (opt.isPresent()) {
-			userDao.deleteById(user.getEmail());
+		if (user != null) {
+			userDao.deleteById(username);
 			
 			return "Your account has been deleted successfully";
 		}
 		else {
-			throw new UserNotFoundException("User is not present with this email id: " +user.getEmail());
+			throw new UserNotFoundException("User is not present with this email id: " +username);
 		}
 	}
 
